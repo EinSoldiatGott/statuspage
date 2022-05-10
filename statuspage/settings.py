@@ -147,8 +147,8 @@ INSTALLED_APPS = (
 )
 
 try:
-    MIDDLEWARE_CLASSES += (
-#        'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
+    MIDDLEWARE_CLASSES = (
+        #'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
         'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     )
 
@@ -158,7 +158,7 @@ try:
         'dsn': os.environ.get('SENTRY_URL', None)
     }
 except Exception as e:
-    logger.warn('Unable to load Raven: %s' % (e))
+    logger.warn('Unable to load Raven: %s' % e)
 
 
 if os.environ.get('REDIS_URL', None):

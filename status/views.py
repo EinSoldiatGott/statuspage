@@ -1,11 +1,11 @@
 from datetime import date, timedelta
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.template import RequestContext, Template
 from django.template.loader import get_template
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import (
     MonthArchiveView, YearArchiveView, CreateView, DeleteView, DetailView, ListView, TemplateView
@@ -37,7 +37,7 @@ def create_incident(request):
         if form.is_valid() and form2.is_valid():
             i = form.save(commit=False)
             i.user = request.user
-            print i
+            print(i)
             i.save()
 
             f = form2.save(commit=False)

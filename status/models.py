@@ -1,15 +1,9 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.utils import timezone
 
 
-STATUS_CHOICES = (
-    ('success', 'Success'),
-    ('info', 'Information'),
-    ('warning', 'Warning'),
-    ('danger', 'Danger'),
-)
 
 
 class BaseModel(models.Model):
@@ -30,6 +24,14 @@ class BaseModel(models.Model):
 
 class Status(BaseModel):
     """ Status of an incident or event """
+
+    class Month(models.TextChoices):
+
+        success = 'success', 'Success'
+        info = 'info', 'Information'
+        warning = 'warning', 'Warning'
+        danger = 'danger', 'Danger'
+
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Information')
     icon = models.CharField(max_length=255, help_text='Font Awesome icon name', default='fa-warning')
